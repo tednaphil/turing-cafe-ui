@@ -27,10 +27,21 @@ function App() {
     })
     .then(response => response.json())
     .then(data => addReservation(data))
+    .catch(err => console.log(err.message))
   }
 
   function addReservation(newReservation) {
     setReservations([newReservation, ...reservations])
+  }
+
+  function deleteReservation(e, id) {
+    e.preventDefault();
+    fetch(`http://localhost:3001/api/v1/reservations/${id}`, {
+      method: 'DELETE'
+    })
+    .then(response => response.json())
+    .then(data => setReservations(data))
+    .catch(err => console.log(err.message))
   }
 
 
@@ -38,10 +49,10 @@ function App() {
     <div className="App">
       <h1 className='app-title'>Turing Cafe Reservations</h1>
       <div className='resy-form'>
-        <Form addReservation={addReservation} postReservation={postReservation}/>
+        <Form postReservation={postReservation}/>
       </div>
       <div className='resy-container'>
-        <Reservations reservations={reservations}/>
+        <Reservations reservations={reservations} deleteReservation={deleteReservation}/>
       </div>
     </div>
   );

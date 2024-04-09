@@ -1,6 +1,12 @@
-.reservation-card{
+.reservation-card {
     background-color: azure;
     padding: 2px;
     margin: 2px;
     outline: 2px solid teal;
+}
+
+button {
+    background-color: teal;
+    color: azure;
+    border-radius: 80px;
 }
