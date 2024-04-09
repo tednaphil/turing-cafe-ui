@@ -5,7 +5,7 @@ function Form({addReservation}) {
     const [name, setName] = useState('');
     const [date, setDate] = useState('');
     const [time, setTime] = useState('');
-    const [guests, setGuests] = useState('');
+    const [guests, setGuests] = useState(1);
 
     function makeReservation() {
         return {
@@ -13,7 +13,7 @@ function Form({addReservation}) {
             name,
             date,
             time,
-            guests
+            number: Number(guests)
         }
     };
 
@@ -30,7 +30,7 @@ function Form({addReservation}) {
             <input id="name" type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)}/>
             <input id="date" type="text" placeholder="Date (mm/dd)" value={date} onChange={(e) => setDate(e.target.value)}/>
             <input id="time" type="text" placeholder="Time (hh:mm)" value={time} onChange={(e) => setTime(e.target.value)}/>
-            <input id="guests" type="text" placeholder="Number of guests" value={guests} onChange={(e) => setGuests(e.target.value)}/>
+            <input id="guests" type="number" placeholder="Number of guests" value={guests} onChange={(e) => setGuests(e.target.value)}/>
             <input type="submit" value="Make Reservation"/>
         </form>
     )
