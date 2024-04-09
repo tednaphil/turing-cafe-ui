@@ -10,18 +10,23 @@ function App() {
   function getReservations() {
     fetch('http://localhost:3001/api/v1/reservations')
     .then(response => response.json())
-    .then(data => setReservations([...reservations, ...data]))
+    // .then(data => setReservations([...reservations, ...data]))
+    .then(data => setReservations(data))
     .catch(err => console.log(err))
   }
 
   useEffect(() => {getReservations()}, [])
+
+  function addReservation(newReservation) {
+    setReservations([...reservations, newReservation])
+  }
 
 
   return (
     <div className="App">
       <h1 className='app-title'>Turing Cafe Reservations</h1>
       <div className='resy-form'>
-        <Form />
+        <Form addReservation={addReservation}/>
       </div>
       <div className='resy-container'>
         <Reservations reservations={reservations}/>
