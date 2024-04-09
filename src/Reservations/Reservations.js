@@ -15,9 +15,7 @@ function Reservations({reservations}) {
 
     return (
         <>
-            <h2>Reservation Section</h2>
             {cards}
-
         </>
         
     )
