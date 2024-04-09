@@ -21,6 +21,7 @@ function Form({addReservation}) {
         e.preventDefault()
         const newReservation = makeReservation();
         addReservation(newReservation)
+        //reset states of each form input
     }
 
 

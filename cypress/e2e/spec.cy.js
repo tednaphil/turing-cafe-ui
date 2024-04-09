@@ -26,7 +26,17 @@ describe('Turing Cafe', () => {
     .get('.reservation-card').last().contains('12/25')
     .get('.reservation-card').last().contains('8:00 pm')
     .get('.reservation-card').last().contains('Number of guests: 12')
+  })
 
-
+  it('Creates and displays new reservations', () => {
+    cy.get('input[id="name"]').type('Beyonce').should('have.value', 'Beyonce')
+    cy.get('input[id="date"]').type('05/05').should('have.value', '05/05')
+    cy.get('input[id="time"]').type('5:00').should('have.value', '5:00')
+    cy.get('input[id="guests"]').type('5').should('have.value', '15')
+    cy.get('input[type="submit"]').click()
+    .get('.reservation-card').first().contains('Beyonce')
+    .get('.reservation-card').first().contains('05/05')
+    .get('.reservation-card').first().contains('5:00 pm')
+    .get('.reservation-card').first().contains('Number of guests: 15')
   })
 })
