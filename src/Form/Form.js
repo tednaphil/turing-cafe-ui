@@ -1,6 +1,7 @@
 import '../Form/Form.css';
 import { useState } from 'react';
 
+
 function Form({addReservation}) {
     const [name, setName] = useState('');
     const [date, setDate] = useState('');
@@ -32,7 +33,7 @@ function Form({addReservation}) {
             <input id="date" type="text" placeholder="Date (mm/dd)" value={date} onChange={(e) => setDate(e.target.value)}/>
             <input id="time" type="text" placeholder="Time (hh:mm)" value={time} onChange={(e) => setTime(e.target.value)}/>
             <input id="guests" type="number" placeholder="Number of guests" value={guests} onChange={(e) => setGuests(e.target.value)}/>
-            <input type="submit" value="Make Reservation"/>
+            <input id="submit" type="submit" value="Make Reservation"/>
         </form>
     )
 }
