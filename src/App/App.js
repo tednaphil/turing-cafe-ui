@@ -1,10 +1,19 @@
 import './App.css';
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Reservations from '../Reservations/Reservations';
 
 function App() {
   const [reservations, setReservations] = useState([]);
+
+  function getReservations() {
+    fetch('http://localhost:3001/api/v1/reservations')
+    .then(response => response.json())
+    .then(data => setReservations([...reservations, ...data]))
+    .catch(err => console.log(err))
+  }
+
+  useEffect(() => {getReservations()}, [])
 
 
   return (
@@ -13,7 +22,7 @@ function App() {
       <div className='resy-form'>
       </div>
       <div className='resy-container'>
-        <Reservations/>
+        <Reservations reservations={reservations}/>
       </div>
     </div>
   );
