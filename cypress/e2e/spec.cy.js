@@ -17,7 +17,7 @@ describe('Turing Cafe', () => {
     }).as('postReservation')
     .visit('http://localhost:3000/')
   })
-  
+
   it('Displays title and existing reservations', () => {
     cy.get('h1').contains('Turing Cafe Reservations')
     .get('form').children().should('have.length', 5)
@@ -34,13 +34,31 @@ describe('Turing Cafe', () => {
 
   it('Creates and displays new reservations', () => {
     cy.get('input[id="name"]').type('Beyonce').should('have.value', 'Beyonce')
-    cy.get('input[id="date"]').type('05/05').should('have.value', '05/05')
-    cy.get('input[id="time"]').type('5:00').should('have.value', '5:00')
-    cy.get('input[id="guests"]').type('5').should('have.value', '15')
-    cy.get('input[type="submit"]').click()
+    .get('input[id="date"]').type('05/05').should('have.value', '05/05')
+    .get('input[id="time"]').type('5:00').should('have.value', '5:00')
+    .get('input[id="guests"]').type('5').should('have.value', '15')
+    .get('input[type="submit"]').click()
     .get('.reservation-card').first().contains('Beyonce')
     .get('.reservation-card').first().contains('05/05')
     .get('.reservation-card').first().contains('5:00 pm')
     .get('.reservation-card').first().contains('Number of guests: 15')
+  })
+
+  it('Deletes reservations', () => {
+    cy.intercept('DELETE', 'http://localhost:3001/api/v1/reservations/1', {
+      statusCode: 202,
+      body: [
+        {"date": "7/29", "id": 2, "name": "Jolene", "number": 1, "time": "10:00"},
+        {"date": "10/29", "id": 3, "name": "Bellamy", "number": 3, "time": "6:30"},
+        {"date": "1/29", "id": 4, "name": "Taylor", "number": 2, "time": "7:00"},
+        {"date": "12/25", "id": 5, "name": "Santa", "number": 12, "time": "8:00"},
+        {"date": "05/05", "id": 6, "name": "Beyonce", "number": 15, "time": "5:00"}
+      ]
+    }).as('deleteReservation')
+    cy.get('button').first().click()
+    .get('.reservation-card').first().contains('Jolene')
+    .get('.reservation-card').first().contains('7/29')
+    .get('.reservation-card').first().contains('10:00 pm')
+    .get('.reservation-card').first().contains('Number of guests: 1')
   })
 })
