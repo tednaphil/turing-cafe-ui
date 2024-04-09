@@ -2,7 +2,7 @@ import '../Form/Form.css';
 import { useState } from 'react';
 
 
-function Form({addReservation}) {
+function Form({addReservation, postReservation}) {
     const [name, setName] = useState('');
     const [date, setDate] = useState('');
     const [time, setTime] = useState('');
@@ -10,7 +10,7 @@ function Form({addReservation}) {
 
     function makeReservation() {
         return {
-            id: Date.now(),
+            // id: Date.now(),
             name,
             date,
             time,
@@ -21,7 +21,8 @@ function Form({addReservation}) {
     function handleSubmission(e) {
         e.preventDefault()
         const newReservation = makeReservation();
-        addReservation(newReservation)
+        postReservation(newReservation);
+        // addReservation(newReservation)
         //reset states of each form input
     }
 
