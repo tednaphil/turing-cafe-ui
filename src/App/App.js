@@ -18,7 +18,7 @@ function App() {
   useEffect(() => {getReservations()}, [])
 
   function addReservation(newReservation) {
-    setReservations([...reservations, newReservation])
+    setReservations([newReservation, ...reservations])
   }
 
 
