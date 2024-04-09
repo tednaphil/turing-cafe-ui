@@ -11,9 +11,13 @@ describe('Turing Cafe', () => {
         {"date": "12/25", "id": 5, "name": "Santa", "number": 12, "time": "8:00"},
     ]
     }).as('getReservations')
+    cy.intercept('POST', 'http://localhost:3001/api/v1/reservations', {
+      statusCode: 201,
+      body: {"date": "05/05", "id": 6, "name": "Beyonce", "number": 15, "time": "5:00"}
+    }).as('postReservation')
     .visit('http://localhost:3000/')
-
   })
+  
   it('Displays title and existing reservations', () => {
     cy.get('h1').contains('Turing Cafe Reservations')
     .get('form').children().should('have.length', 5)
